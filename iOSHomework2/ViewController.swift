@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         let member = nameTextField.text!
         
         // MARK: -   1️⃣ تحت الخط membersNamesArray إلي المصفوفه memberقم بإضافة المتغير
-        
+        membersNamesArray.append(member)
         
         
         // MARK: -   النهاية
@@ -34,13 +34,13 @@ class ViewController: UIViewController {
         
         // MARK: -  4️⃣ functionCall داخل المتغير  secretNameLetter قم باستدعاء الدالة
         
-        var functionCall = ""
+      let functionCall = encrypWith(emoji: false, array: membersNamesArray)
         
         
         // MARK: -   النهاية
         
         
-        secretSocietyNameLabel.text =  functionCall
+        secretSocietyNameLabel.text = functionCall
     }
     
     
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         
         // MARK: -  5️⃣ functionCall داخل المتغير  secretNameEmoji قم باستدعاء الدالة
         
-        var functionCall = ""
+        let functionCall = encrypWith(emoji: true, array: membersNamesArray)
         
         // MARK: -   النهاية
         
@@ -65,7 +65,20 @@ class ViewController: UIViewController {
     
     
     // MARK: - 2️⃣ تحت هذا الخط secretNameLetter قم بكتابة الداله
-    
+
+      
+    }
+    func secretNameLetter(members:[String]) -> String{
+      
+        
+        var secret = ""
+       
+        for member in members{
+            secret += String(member.prefix(1)).uppercased()
+            
+        }
+        return secret
+    }
     
     // MARK: -   النهاية
     
@@ -73,12 +86,71 @@ class ViewController: UIViewController {
     
     
     
-    // MARK: - 3️⃣ تحت هذا الخط secretNameEmoji قم بكتابة الداله
+    // MARK: - 3️⃣ تحت هذا الخط secretNameEmoji قم بكتابة الدالة
+
+           
+
+
+var member = ""
+
+    func secretNameEmoji(array: [String]) -> String{
+        var secret: String = ""
+        let emojiLetter: [String: String] =
+        [
+        
+            "A": "🛑",
+            "B": "👀",
+            "C": "👁",
+            "D": "👦",
+            "E": "😝",
+            "F": "🙂",
+            "G": "🥶",
+            "H": "🥰",
+            "I": "😎",
+            "J": "👨‍🔧 ",
+            "K": "👩‍🏫",
+            "L": "🧙‍♂️",
+            "M": "🌤",
+            "N": "🔨",
+            "O": "💈",
+            "P": "🩸",
+            "Q": "⚙️",
+            "R": "🤍",
+            "S": "🔵",
+            "T": "🌸",
+            "U": "🧤",
+            "V": "🧟‍♀️",
+            "W": "👳",
+            "X": "💄",
+            "Y": "🤡",
+            "Z": "🥳"
+        ]
     
-    
+
+        for member in array {
+            let prefix = String(member.prefix(1))
+            let emoji = emojiLetter[prefix] ?? "🚫"
+            secret += emoji
+            
+        }
+
+return secret
+
+}
+
+
+
     // MARK: -   النهاية
     
+    //Bonus
     
-    
+    func encrypWith(emoji: Bool, array: [String]) -> String{
+        if emoji{
+            
+            return secretNameEmoji(array: array)
+        }
+        else{
+            return secretNameLetter(members: array)
+        }
 }
 
